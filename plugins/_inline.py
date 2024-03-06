@@ -11,14 +11,14 @@ from datetime import datetime
 from os import remove
 
 from git import Repo
-from telethon import Button
-from telethon.tl.types import InputWebDocument, Message
-from telethon.utils import resolve_bot_file_id
+from pyrogram v2 import Button
+from pyrogram v2.tl.types import InputWebDocument, Message
+from pyrogram v2.utils import resolve_bot_file_id
 
-from Kazu._misc._assistant import callback, in_pattern
-from Kazu.dB._core import HELP, LIST
-from Kazu.fns.helper import gen_chlog, time_formatter, updater
-from Kazu.fns.misc import split_list
+from Medoy._misc._assistant import callback, in_pattern
+from Medoy.dB._core import HELP, LIST
+from Medoy.fns.helper import gen_chlog, time_formatter, updater
+from Medoy.fns.misc import split_list
 
 from . import (
     HNDLR,
@@ -36,7 +36,7 @@ from ._help import _main_help_menu
 
 # ================================================#
 
-kazu = get_string("kazu_1")
+Medoy = get_string("Medoy_1")
 
 helps = get_string("inline_1")
 
@@ -52,21 +52,21 @@ upage = 0
 
 SUP_BUTTONS = [
     [
-        Button.url("• Repo •", url="https://github.com/ionmusic/Kazu-Ubot"),
-        Button.url("• Support •", url="t.me/kazusupportgrp"),
+        Button.url("• Repo •", url="https://github.com/Marszyygreat/Medoy-Pyro"),
+        Button.url("• group •", url="https://t.me/mutualanonlyone"),
     ],
 ]
 
 # --------------------BUTTONS--------------------#
 
 
-@in_pattern("kazu", owner=True)
+@in_pattern("Medoy", owner=True)
 async def inline_handler(event):
     z = []
     for x in LIST.values():
         z.extend(x)
     text = get_string("inline_4").format(
-        kazu,
+        Medoy,
         len(HELP.get("Official", [])),
         len(HELP.get("Addons", [])),
         len(z),
@@ -80,7 +80,7 @@ async def inline_handler(event):
         )
     else:
         result = await event.builder.article(
-            title="Kazu Help Menu", text=text, buttons=_main_help_menu
+            title="Medoy Help Menu", text=text, buttons=_main_help_menu
         )
     await event.answer([result], private=False, cache_time=300, gallery=True)
 
@@ -110,7 +110,7 @@ async def setting(event):
         z.extend(x)
     await event.edit(
         get_string("inline_4").format(
-            kazu,
+            Medoy,
             len(HELP.get("Official", [])),
             len(HELP.get("Addons", [])),
             len(z),
@@ -211,17 +211,17 @@ async def _(event):
     changelog_str = changelog + "\n\n" + get_string("inline_8")
     if len(changelog_str) > 1024:
         await event.edit(get_string("upd_4"))
-        with open("kazu_updates.txt", "w+") as file:
+        with open("Medoy_updates.txt", "w+") as file:
             file.write(tl_chnglog)
         await event.edit(
             get_string("upd_5"),
-            file="kazu_updates.txt",
+            file="Medoy_updates.txt",
             buttons=[
                 [Button.inline("• Uᴘᴅᴀᴛᴇ Nᴏᴡ •", data="updatenow")],
                 [Button.inline("«", data="ownr")],
             ],
         )
-        remove("kazu_updates.txt")
+        remove("Medoy_updates.txt")
     else:
         await event.edit(
             changelog_str,
@@ -273,7 +273,7 @@ async def opner(event):
         z.extend(x)
     await event.edit(
         get_string("inline_4").format(
-            kazu,
+            Medoy,
             len(HELP.get("Official", [])),
             len(HELP.get("Addons", [])),
             len(z),
@@ -361,7 +361,7 @@ async def ibuild(e):
                 _type = "gif"
             else:
                 try:
-                    if "telethon.tl.types" in str(type(pic)):
+                    if "pyrogram v2.tl.types" in str(type(pic)):
                         _pic = pic
                     else:
                         _pic = resolve_bot_file_id(pic)
@@ -371,9 +371,9 @@ async def ibuild(e):
                     results = [
                         await builder.document(
                             _pic,
-                            title="Kazu Op",
+                            title="Medoy Op",
                             text=txt,
-                            description="@DisiniKazu",
+                            description="@Siid0yyy",
                             buttons=btn,
                             link_preview=False,
                         )
@@ -386,10 +386,10 @@ async def ibuild(e):
                     cont = InputWebDocument(pic, 0, mime_type, [])
                 results = [
                     await builder.article(
-                        title="Kazu Op",
+                        title="Medoy Op",
                         type=_type,
                         text=txt,
-                        description="@DisiniKazu",
+                        description="@Siid0yyy",
                         include_media=include_media,
                         buttons=btn,
                         thumb=cont,
@@ -401,7 +401,7 @@ async def ibuild(e):
         except Exception as er:
             LOGS.exception(er)
     result = [
-        await builder.article("Kazu Op", text=txt, link_preview=False, buttons=btn)
+        await builder.article("Medoy Op", text=txt, link_preview=False, buttons=btn)
     ]
     await e.answer(result)
 
